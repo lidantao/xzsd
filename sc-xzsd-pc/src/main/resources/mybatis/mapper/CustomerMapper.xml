@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzsd.pc.customer.dao.CustomerDao">
+<!--    查询全部客户分页列表信息-->
+    <select id="listCustomerByPage" parameterType="com.xzsd.pc.customer.entity.CustomerInfo" resultType="com.xzsd.pc.customer.entity.CustomerInfo">
+        select
+        a.user_account        as      userAccount,
+        a.user_name           as      userName,
+        a.user_sex            as      userSex,
+        a.user_phone          as      userPhone,
+        a.user_email          as      userEmail,
+        a.user_id_card        as      userIdCard,
+        a.user_code           as      userCode,
+        a.version             as      version
+        from t_sys_user a, t_sys_customer b
+        where is_delete     =   0
+        and   a.user_code   =   b.user_code
+        <if test="userName != null and userName != ''">
+            and b.user_name like concat('%', #{userName}, '%')
+        </if>
+        <if test="userAccount != null and userAccount != ''">
+            and b.user_account like concat('%', #{userAccount}, '%')
+        </if>
+        order by create_time
+    </select>
+<!--    查询此店长门下的所有客户-->
+    <select id="listCustomerByPage" parameterType="com.xzsd.pc.customer.entity.CustomerInfo" resultType="com.xzsd.pc.customer.entity.CustomerInfo">
+        select
+        a.user_account        as      userAccount,
+        a.user_name           as      userName,
+        a.user_sex            as      userSex,
+        a.user_phone          as      userPhone,
+        a.user_email          as      userEmail,
+        a.user_id_card        as      userIdCard,
+        a.user_code           as      userCode,
+        a.version             as      version
+        from t_sys_user a, t_sys_customer b
+        where is_delete     =   0
+        and   a.user_code   =   b.user_code
+        and   b.store_code  =   #{userCode}
+        <if test="userName != null and userName != ''">
+            and b.user_name like concat('%', #{userName}, '%')
+        </if>
+        <if test="userAccount != null and userAccount != ''">
+            and b.user_account like concat('%', #{userAccount}, '%')
+        </if>
+        order by create_time
+    </select>
+</mapper>

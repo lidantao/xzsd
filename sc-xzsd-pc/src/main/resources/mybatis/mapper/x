@@ -1,0 +1,81 @@
+<!--<?xml version="1.0" encoding="UTF-8" ?>-->
+<!--<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >-->
+<!--<mapper namespace="com.xzsd.pc.menu.dao.MenuDao">-->
+<!--&lt;!&ndash;    查询菜单名列表接口&ndash;&gt;-->
+<!--    <select id="listMenu" resultType="com.xzsd.pc.menu.entity.MenuInfo">-->
+<!--        select-->
+<!--        menu_code      as       menuCode,-->
+<!--        menu_name      as       menuName,-->
+<!--        version        as       version-->
+<!--        from    t_sys_menu-->
+<!--    </select>-->
+<!--&lt;!&ndash;&lt;!&ndash;    根据角色查询首页菜单列表接口&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;    <select id="listMenuHome" parameterType="java.lang.String" resultType="com.xzsd.pc.menu.entity.MenuInfo">&ndash;&gt;-->
+<!--&lt;!&ndash;        select&ndash;&gt;-->
+<!--&lt;!&ndash;        menu_code      as       menuCode,&ndash;&gt;-->
+<!--&lt;!&ndash;        menu_name      as       menuName,&ndash;&gt;-->
+<!--&lt;!&ndash;        version        as       version&ndash;&gt;-->
+<!--&lt;!&ndash;        from    t_sys_menu&ndash;&gt;-->
+<!--&lt;!&ndash;        where   is_delete = 0&ndash;&gt;-->
+<!--&lt;!&ndash;        <if test="userRole == 1">&ndash;&gt;-->
+<!--&lt;!&ndash;            and menu_code in ('100861116','100861117','100861119','1008611120')&ndash;&gt;-->
+<!--&lt;!&ndash;        </if>&ndash;&gt;-->
+
+<!--&lt;!&ndash;    </select>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;    查询菜单名是否存在&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;    <select id="checkMenuName" parameterType="com.xzsd.pc.menu.entity.MenuInfo" resultType="int">&ndash;&gt;-->
+<!--&lt;!&ndash;        select  count(menu_code)&ndash;&gt;-->
+<!--&lt;!&ndash;        from    t_sys_menu&ndash;&gt;-->
+<!--&lt;!&ndash;        where   menu_name   =   #{menuName}&ndash;&gt;-->
+<!--&lt;!&ndash;        and     is_delete   =   0&ndash;&gt;-->
+<!--&lt;!&ndash;    </select>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;    新增菜单接口&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;    <insert id="addMenu" parameterType="com.xzsd.pc.menu.entity.MenuInfo">&ndash;&gt;-->
+<!--&lt;!&ndash;        insert into t_sys_menu&ndash;&gt;-->
+<!--&lt;!&ndash;        (&ndash;&gt;-->
+<!--&lt;!&ndash;        menu_code,          menu_name,          menu_path,&ndash;&gt;-->
+<!--&lt;!&ndash;        menu_remark,        is_delete,          create_user,&ndash;&gt;-->
+<!--&lt;!&ndash;        create_time,        last_update_user,   last_update_time,&ndash;&gt;-->
+<!--&lt;!&ndash;        version&ndash;&gt;-->
+<!--&lt;!&ndash;        )&ndash;&gt;-->
+<!--&lt;!&ndash;        values&ndash;&gt;-->
+<!--&lt;!&ndash;        (&ndash;&gt;-->
+<!--&lt;!&ndash;        #{menuCode},        #{menuName},        #{menuPath},&ndash;&gt;-->
+<!--&lt;!&ndash;        #{menuRemark},      #{isDelete},        #{createUser},&ndash;&gt;-->
+<!--&lt;!&ndash;        now(),              #{lastUpdateUser},  now(),&ndash;&gt;-->
+<!--&lt;!&ndash;        0&ndash;&gt;-->
+<!--&lt;!&ndash;        )&ndash;&gt;-->
+<!--&lt;!&ndash;    </insert>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;    查询菜单详情接口&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;    <select id="findMenu" parameterType="java.lang.String" resultType="com.xzsd.pc.menu.entity.MenuInfo">&ndash;&gt;-->
+<!--&lt;!&ndash;        select&ndash;&gt;-->
+<!--&lt;!&ndash;        menu_name           as      menuName,&ndash;&gt;-->
+<!--&lt;!&ndash;        menu_path           as      menuPath,&ndash;&gt;-->
+<!--&lt;!&ndash;        menu_remark         as      menuRemark&ndash;&gt;-->
+<!--&lt;!&ndash;        from    t_sys_menu&ndash;&gt;-->
+<!--&lt;!&ndash;        where   menu_code   =       #{menuCode}&ndash;&gt;-->
+<!--&lt;!&ndash;    </select>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;    修改菜单接口&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;    <update id="updateMenu" parameterType="com.xzsd.pc.menu.entity.MenuInfo">&ndash;&gt;-->
+<!--&lt;!&ndash;        update t_sys_menu&ndash;&gt;-->
+<!--&lt;!&ndash;        set&ndash;&gt;-->
+<!--&lt;!&ndash;        menu_name           =       #{menuName},&ndash;&gt;-->
+<!--&lt;!&ndash;        menu_remark         =       #{menuRemark},&ndash;&gt;-->
+<!--&lt;!&ndash;        menu_path           =       #{menuPath},&ndash;&gt;-->
+<!--&lt;!&ndash;        version             =       version + 1,&ndash;&gt;-->
+<!--&lt;!&ndash;        last_update_user    =       #{lastUpdateUser},&ndash;&gt;-->
+<!--&lt;!&ndash;        last_update_time    =       now()&ndash;&gt;-->
+<!--&lt;!&ndash;        where   menu_code   =       #{menuCode}&ndash;&gt;-->
+<!--&lt;!&ndash;        and     version     =       #{version}&ndash;&gt;-->
+<!--&lt;!&ndash;    </update>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;    删除菜单接口&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;    <update id="deleteMenu" parameterType="java.lang.String">&ndash;&gt;-->
+<!--&lt;!&ndash;        update t_sys_menu&ndash;&gt;-->
+<!--&lt;!&ndash;        set&ndash;&gt;-->
+<!--&lt;!&ndash;        is_delete           =       1,&ndash;&gt;-->
+<!--&lt;!&ndash;        version             =       version + 1,&ndash;&gt;-->
+<!--&lt;!&ndash;        last_update_user    =       #{lastUpdateUser},&ndash;&gt;-->
+<!--&lt;!&ndash;        last_update_time    =       now()&ndash;&gt;-->
+<!--&lt;!&ndash;        where   menu_code   =       #{menuCode}&ndash;&gt;-->
+<!--&lt;!&ndash;    </update>&ndash;&gt;-->
+<!--</mapper>-->
